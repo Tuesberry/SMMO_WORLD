@@ -1,0 +1,115 @@
+syntax = "proto3";
+package Protocol;
+
+message	PLAYER_POS_INFO
+{
+	float x = 1;
+	float y = 2;
+	float z = 3;
+	float yaw = 4;
+	float pitch = 5;
+	float roll = 6;
+	float vx = 7;
+	float vy = 8;
+	float vz = 9;
+	float ax = 10;
+	float ay = 11;
+	float az = 12;
+}
+
+message C2S_LOGIN
+{
+	string player_id = 1;
+	string player_pw = 2;
+	int32 player_type = 3;
+	int32 login_time = 4;
+}
+
+message S2C_LOGIN_RESULT
+{
+	int32 session_id = 1;
+	bool result = 2;
+	int32 player_type = 3;
+	string player_str_id = 4;
+	int64 time_stamp = 5;
+	int32 login_time = 6;
+	PLAYER_POS_INFO pos_info = 7;
+}
+
+message C2S_LOGOUT
+{
+	int32 session_id = 1;
+}
+
+message S2C_LOGOUT_RESULT
+{
+	int32 session_id = 1;
+	bool result = 2;
+}
+
+message	C2S_LOGIN_ADMIN
+{
+	string admin_id = 1;
+	string admin_pw = 2;
+}
+
+message S2C_LOGIN_ADMIN_RESULT
+{
+	int32 session_id = 1;
+	bool result = 2;
+}
+
+message C2S_MOVE
+{
+	int32 session_id = 1;
+	int64 time_stamp = 3;
+	PLAYER_POS_INFO pos_info = 2;
+	bool request_result = 4;
+}
+
+message S2C_MOVE_RESULT
+{
+	int32 session_id = 1;
+	int64 time_stamp = 2;
+	int64 process_time = 3;
+	int64 send_time = 4;
+	int64 recv_time = 5;
+}
+
+message S2C_MOVE
+{
+	int32 session_id = 1;
+	int32 target_id = 2;
+	int64 time_stamp = 3;
+	PLAYER_POS_INFO pos_info = 4;
+}
+
+message S2C_ENTER
+{
+	int32 session_id = 1;
+	int32 target_id = 2;
+	string target_str_id = 3;
+	int32 player_type = 4;
+	int64 time_stamp = 5;
+	PLAYER_POS_INFO pos_info = 6;
+}
+
+message S2C_LEAVE
+{
+	int32 session_id = 1;
+	int32 target_id = 2;
+}
+
+message C2S_CHAT
+{
+	int32 session_id = 1;
+	string chat = 2;
+}
+
+message S2C_CHAT
+{
+	int32 session_id = 1;
+	int32 target_id = 2;
+	string target_str_id = 3;
+	string chat = 4;
+}
